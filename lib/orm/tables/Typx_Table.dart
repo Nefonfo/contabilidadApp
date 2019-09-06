@@ -9,6 +9,7 @@ primaryKeyName = "idt";
 
 // declare fields
 fields = [
+  SqfEntityField("name", DbType.text),
   SqfEntityField("type", DbType.text),  // Activos, pasivos, capital, resultados
   SqfEntityField("subType", DbType.text, defaultValue: null), // circulante, dif, etc
   SqfEntityField("natural", DbType.text),
