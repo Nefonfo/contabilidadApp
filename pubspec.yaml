@@ -27,7 +27,10 @@ dependencies:
   sqflite: ^1.1.0
   sqfentity: any
   flutter_swiper : any
-  intro_slider: ^2.2.8
+  line_icons: ^0.2.0
+  flutter_slidable: "^0.5.3"
+  liquid_pull_to_refresh: ^1.1.1
+  flutter_datetime_picker: ^1.2.6
 
 dev_dependencies:
   flutter_test:

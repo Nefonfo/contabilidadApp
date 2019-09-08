@@ -12,21 +12,31 @@ class SeatingServices{
     this.date
   });
 
-  SeatingServices.first();
+  SeatingServices.first({
+    @required this.date
+  });
+
+  SeatingServices.delete();
 
   Future<int> firstSeating(){
+    if( date == null){
+      return Future.delayed(Duration(seconds: 1), () => -1);
+    }
     final seating = Seating(
       alias: "Primer Asiento",
-      date: DateTime.now().toString()
+      date: date.toString()
     ).save();
 
     return seating;
   }
 
   Future<int> newSeating() {
+    if(this.alias == null || date == null){
+      return Future.delayed(Duration(seconds: 1), () => -1);
+    }
     final seating = Seating(
       alias: this.alias,
-      date: DateTime.now().toString()
+      date: date.toString()
     ).save();
     return seating;
   }
@@ -49,6 +59,15 @@ class SeatingServices{
   Future<List<Seating>> selectAll(){
     final seating = Seating().select().toList();
     return seating;
+  }
+
+  Future<bool> deleteAllDataBase(){
+
+    final transactions = Transaction().select().delete();
+    final types = Typx().select().delete();
+    final seating = Seating().select().delete();
+
+    return Future.delayed(Duration(seconds: 1), () => true);
   }
 
 }

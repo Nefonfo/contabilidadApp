@@ -6,27 +6,29 @@ class TypesServices {
   int idt;
   String name, type, subType, natural;
 
-  TypesServices(
-      {this.idt,
-       this.name,
-       this.type,
-       this.subType,
-       this.natural});
+  TypesServices.insegure();
+  TypesServices({this.idt, this.name, this.type, this.subType, this.natural});
 
   TypesServices.onlyId({@required this.idt}) : assert(idt != null);
 
+
   TypesServices.firstProtocol();
 
-  Future<Null> fistProtocolInsert() async{
-    for(Map<String,String> type in constants.types){
-      TypesServices add = new TypesServices(
-        name: type['name'],
-        type: type['type'],
-        subType: type['subType'],
-        natural: type['natural']
-      );
-      add.newType();
+  Future<int> fistProtocolInsert() async {
+    List<Typx> areSome = await this.selectAll();
+    if (areSome == null || areSome.isEmpty) {
+      print('created some');
+      for (Map<String, String> type in constants.types) {
+        TypesServices add = new TypesServices(
+            name: type['name'],
+            type: type['type'],
+            subType: type['subType'],
+            natural: type['natural']);
+        int ok = await add.newType();
+        print(ok);
+      }
     }
+    return 1;
   }
 
   Future<int> newType() async {
@@ -64,22 +66,22 @@ class TypesServices {
     dynamic type;
     switch (what) {
       case "idt":
-         type = await Typx().select().idt.equals(equals).toList();
+        type = await Typx().select().idt.equals(equals).toList();
         break;
       case "name":
-         type = await Typx().select().name.equals(equals).toList();
+        type = await Typx().select().name.equals(equals).toList();
         break;
       case "type":
-         type = await Typx().select().type.equals(equals).toList();
+        type = await Typx().select().type.equals(equals).toList();
         break;
       case "subType":
-         type = await Typx().select().subType.equals(equals).toList();
+        type = await Typx().select().subType.equals(equals).toList();
         break;
       case "natural":
-         type = await Typx().select().natural.equals(equals).toList();
+        type = await Typx().select().natural.equals(equals).toList();
         break;
       case "default":
-          type = await Typx().select().toList();
+        type = await Typx().select().toList();
         break;
     }
     return type;
