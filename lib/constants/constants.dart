@@ -35,7 +35,6 @@ final List<Map<String, String>> types = [
     "subType": "CORTO PLAZO",
     "natural": "ACREEDOR"
   },
-
   {
     "name": "INVERSIONES TEMPORALES",
     "type": "ACTIVO",
@@ -61,7 +60,6 @@ final List<Map<String, String>> types = [
     "subType": "CORTO PLAZO",
     "natural": "ACREEDOR"
   },
-
   {
     "name": "CLIENTES",
     "type": "ACTIVO",
@@ -74,7 +72,6 @@ final List<Map<String, String>> types = [
     "subType": "CORTO PLAZO",
     "natural": "ACREEDOR"
   },
-
   {
     "name": "ALMACEN",
     "type": "ACTIVO",
@@ -87,7 +84,6 @@ final List<Map<String, String>> types = [
     "subType": "LARGO PLAZO",
     "natural": "ACREEDOR"
   },
-
   {
     "name": "MOBILIARIO",
     "type": "ACTIVO",
@@ -100,14 +96,14 @@ final List<Map<String, String>> types = [
     "subType": "LARGO PLAZO",
     "natural": "ACREEDOR"
   },
-  {
+{
     "name": "EQUIPO DE TRANSPORTE",
     "type": "ACTIVO",
     "subType": "FIJO",
     "natural": "DEUDOR"
   },
   {
-    "name": "ACREEDORES BANCARIOS A LARGO PLAZO",
+    "name": "DACREEDORES BANCARIOS A LARGO PLAZO",
     "type": "PASIVO",
     "subType": "LARGO PLAZO",
     "natural": "ACREEDOR"
@@ -136,7 +132,6 @@ final List<Map<String, String>> types = [
     "subType": "CAPITAL",
     "natural": "ACREEDOR"
   },
-
   {
     "name": "PATENTES Y MARCAS",
     "type": "ACTIVO",
@@ -149,7 +144,6 @@ final List<Map<String, String>> types = [
     "subType": "CAPITAL",
     "natural": "ACREEDOR"
   },
-
   {
     "name": "GASTOS PREOPERATIVOS",
     "type": "ACTIVO",
@@ -159,10 +153,9 @@ final List<Map<String, String>> types = [
   {
     "name": "UTILIDAD DEL EJERCICIO",
     "type": "CAPITAL",
-    "subType": "CAPITAL ",
+    "subType": "CAPITAL",
     "natural": "ACREEDOR"
   },
-
   {
     "name": "GASTOS DE ORGANIZACION",
     "type": "ACTIVO",
@@ -175,11 +168,124 @@ final List<Map<String, String>> types = [
     "subType": "CORTO PLAZO",
     "natural": "ACREEDOR"
   },
-
   {
     "name": "ALMACEN",
     "type": "ACTIVO",
     "subType": "DIFERIDO",
     "natural": "DEUDOR"
   },
-  ];
+ {
+    "name": "VENTAS TOTALES",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "ACREEDOR"
+  },
+  {
+    "name": "DEVOLUCIONES / VENTAS",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "VENTAS NETAS",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "ACREEDOR"
+  },
+  {
+    "name": "COSTO DE VENTAS",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "INVENTARIO INICIAL",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "INVENTARIO FINAL",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "COMPRAS",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "DEVOLUCIONES / COMPRAS",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "ACREEDOR"
+  },
+  {
+    "name": "UTILIDAD BRUTA",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "ACREEDOR"
+  },
+  {
+    "name": "GASTOS DE OPERACION",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "GASTOS DE ADMINISTRACION ",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "GASTOS DE ADMINISTRACION ",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "GASTOS DE VENTAS",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "UTILIDAD EN OPERACION",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "ACREEDOR"
+  },
+  {
+    "name": "RIF",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "ACREEDOR"
+  },
+  {
+    "name": "PRODUCTOS FINANCIEROS",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "ACREEDOR"
+  },
+  {
+    "name": "GASTOS FINANCIEROS",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "OTROS INGRESOS",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "ACREEDOR"
+  },
+  {
+    "name": "OTROS GASTOS",
+    "type": "RESULTADO",
+    "subType": "RESULTADO",
+    "natural": "DEUDOR"
+}
+ ];

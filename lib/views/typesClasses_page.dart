@@ -238,7 +238,7 @@ class _TypesClassesPageState extends State<TypesClassesPage> {
         for (int z = 0; z < classesFinded.length; z++) {
           if (datas[x].subType == classesFinded[z]) {
             break;
-          } else if (datas[x].subType == classesFinded[z] &&
+          } else if (
               z == (classesFinded.length - 1)) {
             classesFinded.add(datas[x].subType);
           }
