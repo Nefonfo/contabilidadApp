@@ -6,6 +6,7 @@ import 'package:contabilidadapp/responsive/responsive.dart';
 import 'package:contabilidadapp/services/Seating_services.dart';
 import 'package:contabilidadapp/services/Types_services.dart';
 import 'package:contabilidadapp/views/newSeating_page.dart';
+import 'package:contabilidadapp/views/seatingData_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -124,6 +125,15 @@ class _SeatingsPageState extends State<SeatingsPage> {
           title: Text("$alias", style: TextStyle(fontWeight: FontWeight.bold)),
           subtitle:
               Text("Realizado el: ${date.day} - ${date.month} - ${date.year}"),
+          onTap: (){
+            Navigator.push(context, CupertinoPageRoute(
+              title: "SeatingData",
+              builder: (_) => SeatingDataPage(
+                idS: ids,
+                title: alias,
+              )
+            ));
+          },
         ),
         actions: (ids == 1)
             ? [

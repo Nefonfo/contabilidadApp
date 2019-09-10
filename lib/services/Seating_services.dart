@@ -1,4 +1,6 @@
 import 'package:contabilidadapp/orm/models.dart';
+import 'package:contabilidadapp/services/Transactions_services.dart';
+import 'package:contabilidadapp/services/Types_services.dart';
 import 'package:flutter/widgets.dart';
 
 class SeatingServices{
@@ -18,26 +20,54 @@ class SeatingServices{
 
   SeatingServices.delete();
 
-  Future<int> firstSeating(){
+  Future<int> firstSeating() async{
     if( date == null){
       return Future.delayed(Duration(seconds: 1), () => -1);
     }
-    final seating = Seating(
+    final seating = await Seating(
       alias: "Primer Asiento",
       date: date.toString()
     ).save();
 
+    TypesServices serviceTypxProtocol = new TypesServices();
+    List<Typx> typesAll= await serviceTypxProtocol.selectAll();
+
+    typesAll.forEach((Typx typx){
+      TransactionsService serviceTrans = new TransactionsService(
+        idtr: null,
+        name: typx.name,
+        price: 0,
+        seatingRelation: seating,
+        typxRelation: typx.idt
+      );
+      serviceTrans.newTransaction();
+    });
+
     return seating;
   }
 
-  Future<int> newSeating() {
+  Future<int> newSeating() async{
     if(this.alias == null || date == null){
       return Future.delayed(Duration(seconds: 1), () => -1);
     }
-    final seating = Seating(
+    final seating = await Seating(
       alias: this.alias,
       date: date.toString()
     ).save();
+
+    TypesServices serviceTypxProtocol = new TypesServices();
+    List<Typx> typesAll= await serviceTypxProtocol.selectAll();
+
+    typesAll.forEach((Typx typx){
+      TransactionsService serviceTrans = new TransactionsService(
+        idtr: null,
+        name: typx.name,
+        price: 0,
+        seatingRelation: seating,
+        typxRelation: typx.idt
+      );
+      serviceTrans.newTransaction();
+    });
     return seating;
   }
 

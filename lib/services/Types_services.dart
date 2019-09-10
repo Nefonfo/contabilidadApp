@@ -58,7 +58,7 @@ class TypesServices {
   }
 
   Future<List<Typx>> selectAll() async {
-    final type = await Typx().select().toList();
+    final type = await Typx().select().orderBy("type").toList();
     return type;
   }
 
