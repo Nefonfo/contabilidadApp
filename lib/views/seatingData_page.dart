@@ -83,7 +83,7 @@ class _HomePageState extends State<SeatingDataPage> {
   }
 
   Widget _typesTile(Transaction datas, Responsive grid) {
-    TextEditingController _textFieldController = TextEditingController();
+    
     return ListTile(
       title: Text(datas.name,
           style: TextStyle(
@@ -95,12 +95,63 @@ class _HomePageState extends State<SeatingDataPage> {
             fontWeight: FontWeight.bold,
             fontSize: grid.blockSizeVertical * 3
           )),
-      trailing: CupertinoButton(
-        child: Text("Editar"),
-        color: CupertinoColors.destructiveRed,
-        onPressed: () {
-          double value = datas.price;
-          showDialog(
+      trailing: FutureBuilder(
+            future: buttonData(context, datas),
+            builder: (__, AsyncSnapshot<List<Widget>> widget){
+              if(!widget.hasData){
+                return CupertinoActivityIndicator();
+              }else{
+                return  ConstrainedBox(
+                  constraints:  const BoxConstraints(maxWidth: 200),
+                  child: Row(
+                  children: widget.data.toList(),
+                ),
+                );
+              }
+            },
+          ),
+      
+    );
+  }
+
+  Future<Transaction> getMoneyByIdAndName(String name) {
+    TransactionsService service =
+        TransactionsService(idtr: this.idS, name: name);
+    return service.getMoneyByIdAndName();
+  }
+
+  List<String> _classesFinded(List<Typx> datas) {
+    List<String> classesFinded = [];
+    for (int x = 0; x < datas.length; x++) {
+      if (classesFinded == null || classesFinded.isEmpty) {
+        classesFinded.add(datas[x].type);
+      } else {
+        for (int z = 0; z < classesFinded.length; z++) {
+          if (datas[x].type == classesFinded[z]) {
+            break;
+          } else if (z == (classesFinded.length - 1)) {
+            classesFinded.add(datas[x].type);
+          }
+        }
+      }
+    }
+
+    return classesFinded;
+  }
+}
+
+Future<List<Widget>> buttonData(BuildContext context, Transaction trans)async{ 
+  TypesServices typxService = TypesServices();
+  double value;
+  final kind = ["CARGO", "ABONO"];
+  TextEditingController _textFieldController = TextEditingController();
+  List<Typx> data = await typxService.selectWhere("name", trans.name);
+  return kind.map((c) =>
+    RaisedButton(
+    child: (data.first.type == "RESULTADO") ? Text("RES") : Text(c),
+    color: ((data.first.type == "PASIVO" && c == "ABONO") || (data.first.type == "CAPITAL" && c == "ABONO") || (data.first.type == "ACTIVO" && c == "CARGO")) ? CupertinoColors.activeGreen : CupertinoColors.destructiveRed,
+    onPressed: (){
+        showDialog(
               context: context,
               builder: (context) {
                 return AlertDialog(
@@ -117,13 +168,20 @@ class _HomePageState extends State<SeatingDataPage> {
                     FlatButton(
                       child: new Text('Guardar'),
                       onPressed: () {
+                        if((data.first.type == "PASIVO" && c == "ABONO") || (data.first.type == "CAPITAL" && c == "ABONO") || (data.first.type == "ACTIVO" && c == "CARGO")){
+                          trans.price = trans.price + value;
+                        }else if(data.first.type == "RESULTADO"){
+                          trans.price = trans.price + value;
+                        }else{
+                          trans.price = trans.price - value;
+                        }
                         TransactionsService transService =
                             new TransactionsService(
-                                idtr: datas.idtr,
-                                name: datas.name,
-                                price: value,
-                                seatingRelation: datas.SeatingIds,
-                                typxRelation: datas.TypxIdt);
+                                idtr: trans.idtr,
+                                name: trans.name,
+                                price: trans.price,
+                                seatingRelation: trans.SeatingIds,
+                                typxRelation: trans.TypxIdt);
 
                         transService.updatePriceTransaction();
                         Navigator.pop(context);
@@ -155,35 +213,10 @@ class _HomePageState extends State<SeatingDataPage> {
                   ],
                 );
               });
-        },
-      ),
-    );
-  }
-
-  Future<Transaction> getMoneyByIdAndName(String name) {
-    TransactionsService service =
-        TransactionsService(idtr: this.idS, name: name);
-    return service.getMoneyByIdAndName();
-  }
-
-  List<String> _classesFinded(List<Typx> datas) {
-    List<String> classesFinded = [];
-    for (int x = 0; x < datas.length; x++) {
-      if (classesFinded == null || classesFinded.isEmpty) {
-        classesFinded.add(datas[x].type);
-      } else {
-        for (int z = 0; z < classesFinded.length; z++) {
-          if (datas[x].type == classesFinded[z]) {
-            break;
-          } else if (z == (classesFinded.length - 1)) {
-            classesFinded.add(datas[x].type);
-          }
-        }
-      }
-    }
-
-    return classesFinded;
-  }
+    },
+  )
+  
+  ).toList();
 }
 
 /*

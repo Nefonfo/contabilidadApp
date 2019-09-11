@@ -58,5 +58,16 @@ class TransactionsService{
   }
 
 
+  Future<double> getSigmaOfType(String type) async{
+    final List<Transaction> data = await Transaction().select(columnsToSelect: ["price"]).name.equals("$type").toList();
+    double total = 0;
+    data.forEach((Transaction c){
+      total += c.price;
+    });
+
+    return total;
+  }
+
+
   
 }

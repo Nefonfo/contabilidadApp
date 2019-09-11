@@ -34,20 +34,7 @@ class _TypesClassesPageState extends State<TypesClassesPage> {
             middle: Title(
               child: Text("Tipos de Cuentas"),
               color: CupertinoColors.black,
-            ),
-            trailing: GestureDetector(
-              child: Icon(
-                CupertinoIcons.add,
-                color: CupertinoColors.destructiveRed,
-                size: 38,
-              ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                        title: "Nueva Cuenta", builder: (_) => NewTypePage()));
-              },
-            ),
+            )
           ),
           child: SafeArea(
             child: LiquidPullToRefresh(

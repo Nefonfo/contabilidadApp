@@ -1,21 +1,9 @@
 final List<Map<String, String>> types = [
   {
-    "name": "CAJA",
-    "type": "ACTIVO",
-    "subType": "CIRCULANTE",
-    "natural": "DEUDOR"
-  },
-  {
     "name": "DOCUMENTOS POR PAGAR",
     "type": "PASIVO",
     "subType": "CORTO PLAZO",
     "natural": "ACREEDOR"
-  },
-  {
-    "name": "BANCOS",
-    "type": "ACTIVO",
-    "subType": "CIRCULANTE",
-    "natural": "DEUDOR"
   },
   {
     "name": "IMPUESTOS POR PAGAR",
@@ -24,35 +12,16 @@ final List<Map<String, String>> types = [
     "natural": "ACREEDOR"
   },
   {
-    "name": "DEUDORES DIVERSOS",
-    "type": "ACTIVO",
-    "subType": "CIRCULANTE",
-    "natural": "DEUDOR"
-  },
-  {
     "name": "ACREEDORES DIVERSOS",
     "type": "PASIVO",
     "subType": "CORTO PLAZO",
     "natural": "ACREEDOR"
   },
   {
-    "name": "INVERSIONES TEMPORALES",
-    "type": "ACTIVO",
-    "subType": "CIRCULANTE",
-    "natural": "DEUDOR"
-  },
-  {
     "name": "CREDITOS BANCARIOS",
     "type": "PASIVO",
     "subType": "CORTO PLAZO",
     "natural": "ACREEDOR"
-  },
-
-  {
-    "name": "DOCUMENTOS POR COBRAR",
-    "type": "ACTIVO",
-    "subType": "CIRCULANTE",
-    "natural": "DEUDOR"
   },
   {
     "name": "ANTICIPO A CLIENTES",
@@ -61,22 +30,10 @@ final List<Map<String, String>> types = [
     "natural": "ACREEDOR"
   },
   {
-    "name": "CLIENTES",
-    "type": "ACTIVO",
-    "subType": "CIRCULANTE",
-    "natural": "DEUDOR"
-  },
-  {
     "name": "PROVEEDORES",
     "type": "PASIVO",
     "subType": "CORTO PLAZO",
     "natural": "ACREEDOR"
-  },
-  {
-    "name": "ALMACEN",
-    "type": "ACTIVO",
-    "subType": "CIRCULANTE",
-    "natural": "DEUDOR"
   },
   {
     "name": "ACREEDORES DIVERSOS A LARGO PLAZO",
@@ -85,28 +42,82 @@ final List<Map<String, String>> types = [
     "natural": "ACREEDOR"
   },
   {
+    "name": "CREDITOS BANCARIOS A LARGO PLAZO",
+    "type": "PASIVO",
+    "subType": "LARGO PLAZO",
+    "natural": "ACREEDOR"
+  },
+  {
+    "name": "CAJA",
+    "type": "ACTIVO",
+    "subType": "CIRCULANTE",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "BANCOS",
+    "type": "ACTIVO",
+    "subType": "CIRCULANTE",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "DEUDORES DIVERSOS",
+    "type": "ACTIVO",
+    "subType": "CIRCULANTE",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "PAGOS ANTICIPADOS",
+    "type": "ACTIVO",
+    "subType": "CIRCULANTE",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "ANTICIPO A PROVEEDORES",
+    "type": "ACTIVO",
+    "subType": "CIRCULANTE",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "DOCUMENTOS POR COBRAR",
+    "type": "ACTIVO",
+    "subType": "CIRCULANTE",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "CLIENTES",
+    "type": "ACTIVO",
+    "subType": "CIRCULANTE",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "ALMACEN",
+    "type": "ACTIVO",
+    "subType": "CIRCULANTE",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "INVERSIONES TEMPORALES",
+    "type": "ACTIVO",
+    "subType": "FIJO",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "EDIFICIOS",
+    "type": "ACTIVO",
+    "subType": "FIJO",
+    "natural": "DEUDOR"
+  },
+  {
     "name": "MOBILIARIO",
     "type": "ACTIVO",
     "subType": "FIJO",
     "natural": "DEUDOR"
   },
   {
-    "name": "CREDITOS BANCARIOS A LARGO PLAZO",
-    "type": "PASIVO",
-    "subType": "LARGO PLAZO",
-    "natural": "ACREEDOR"
-  },
-{
     "name": "EQUIPO DE TRANSPORTE",
     "type": "ACTIVO",
     "subType": "FIJO",
     "natural": "DEUDOR"
-  },
-  {
-    "name": "DACREEDORES BANCARIOS A LARGO PLAZO",
-    "type": "PASIVO",
-    "subType": "LARGO PLAZO",
-    "natural": "ACREEDOR"
   },
   {
     "name": "EQUIPO DE COMPUTO",
@@ -115,10 +126,16 @@ final List<Map<String, String>> types = [
     "natural": "DEUDOR"
   },
   {
-    "name": "RESERVA LEGAL",
-    "type": "CAPITAL",
-    "subType": "CAPITAL",
-    "natural": "ACREEDOR"
+    "name": "MAQUINARIA Y EQUIPO",
+    "type": "ACTIVO",
+    "subType": "FIJO",
+    "natural": "DEUDOR"
+  },
+  {
+    "name": "TERRENOS",
+    "type": "ACTIVO",
+    "subType": "FIJO",
+    "natural": "DEUDOR"
   },
   {
     "name": "CREDITO MERCANTIL",
@@ -127,34 +144,10 @@ final List<Map<String, String>> types = [
     "natural": "DEUDOR"
   },
   {
-    "name": "UTILIDADES RETENIDAS",
-    "type": "CAPITAL",
-    "subType": "CAPITAL",
-    "natural": "ACREEDOR"
-  },
-  {
     "name": "PATENTES Y MARCAS",
     "type": "ACTIVO",
     "subType": "DIFERIDO",
     "natural": "DEUDOR"
-  },
-  {
-    "name": "CAPITAL SOCIAL",
-    "type": "CAPITAL",
-    "subType": "CAPITAL",
-    "natural": "ACREEDOR"
-  },
-  {
-    "name": "GASTOS PREOPERATIVOS",
-    "type": "ACTIVO",
-    "subType": "DIFERIDO",
-    "natural": "DEUDOR"
-  },
-  {
-    "name": "UTILIDAD DEL EJERCICIO",
-    "type": "CAPITAL",
-    "subType": "CAPITAL",
-    "natural": "ACREEDOR"
   },
   {
     "name": "GASTOS DE ORGANIZACION",
@@ -163,18 +156,18 @@ final List<Map<String, String>> types = [
     "natural": "DEUDOR"
   },
   {
-    "name": "GASTOS DE INVESTIGACION",
-    "type": "ACTIVO",
-    "subType": "CORTO PLAZO",
-    "natural": "ACREEDOR"
-  },
-  {
-    "name": "ALMACEN",
+    "name": "GASTOS PREOPERATIVOS",
     "type": "ACTIVO",
     "subType": "DIFERIDO",
     "natural": "DEUDOR"
   },
- {
+  {
+    "name": "GASTOS DE INVESTIGACION",
+    "type": "ACTIVO",
+    "subType": "DIFERIDO",
+    "natural": "DEUDOR"
+  },
+  {
     "name": "VENTAS TOTALES",
     "type": "RESULTADO",
     "subType": "RESULTADO",
@@ -187,22 +180,10 @@ final List<Map<String, String>> types = [
     "natural": "DEUDOR"
   },
   {
-    "name": "VENTAS NETAS",
-    "type": "RESULTADO",
-    "subType": "RESULTADO",
-    "natural": "ACREEDOR"
-  },
-  {
-    "name": "COSTO DE VENTAS",
-    "type": "RESULTADO",
-    "subType": "RESULTADO",
-    "natural": "DEUDOR"
-  },
-  {
     "name": "INVENTARIO INICIAL",
     "type": "RESULTADO",
     "subType": "RESULTADO",
-    "natural": "DEUDOR"
+    "natural": "ACREEDOR"
   },
   {
     "name": "INVENTARIO FINAL",
@@ -214,34 +195,16 @@ final List<Map<String, String>> types = [
     "name": "COMPRAS",
     "type": "RESULTADO",
     "subType": "RESULTADO",
-    "natural": "DEUDOR"
+    "natural": "ACREEDOR"
   },
   {
     "name": "DEVOLUCIONES / COMPRAS",
     "type": "RESULTADO",
     "subType": "RESULTADO",
-    "natural": "ACREEDOR"
-  },
-  {
-    "name": "UTILIDAD BRUTA",
-    "type": "RESULTADO",
-    "subType": "RESULTADO",
-    "natural": "ACREEDOR"
-  },
-  {
-    "name": "GASTOS DE OPERACION",
-    "type": "RESULTADO",
-    "subType": "RESULTADO",
     "natural": "DEUDOR"
   },
   {
-    "name": "GASTOS DE ADMINISTRACION ",
-    "type": "RESULTADO",
-    "subType": "RESULTADO",
-    "natural": "DEUDOR"
-  },
-  {
-    "name": "GASTOS DE ADMINISTRACION ",
+    "name": "GASTOS DE ADMINISTRACION",
     "type": "RESULTADO",
     "subType": "RESULTADO",
     "natural": "DEUDOR"
@@ -251,18 +214,6 @@ final List<Map<String, String>> types = [
     "type": "RESULTADO",
     "subType": "RESULTADO",
     "natural": "DEUDOR"
-  },
-  {
-    "name": "UTILIDAD EN OPERACION",
-    "type": "RESULTADO",
-    "subType": "RESULTADO",
-    "natural": "ACREEDOR"
-  },
-  {
-    "name": "RIF",
-    "type": "RESULTADO",
-    "subType": "RESULTADO",
-    "natural": "ACREEDOR"
   },
   {
     "name": "PRODUCTOS FINANCIEROS",
@@ -287,5 +238,23 @@ final List<Map<String, String>> types = [
     "type": "RESULTADO",
     "subType": "RESULTADO",
     "natural": "DEUDOR"
-}
- ];
+  },
+  {
+    "name": "RESERVA LEGAL",
+    "type": "CAPITAL",
+    "subType": "CAPITAL",
+    "natural": "ACREEDOR"
+  },
+  {
+    "name": "CAPITAL SOCIAL",
+    "type": "CAPITAL",
+    "subType": "CAPITAL",
+    "natural": "ACREEDOR"
+  },
+  {
+    "name": "UTILIDADES ACUMULADAS",
+    "type": "CAPITAL",
+    "subType": "CAPITAL",
+    "natural": "ACREEDOR "
+  }
+];
