@@ -3,6 +3,7 @@ import 'package:contabilidadapp/responsive/responsive.dart';
 import 'package:contabilidadapp/services/Seating_services.dart';
 import 'package:contabilidadapp/services/Transactions_services.dart';
 import 'package:contabilidadapp/services/Types_services.dart';
+import 'package:contabilidadapp/services/extra_services.dart';
 import 'package:contabilidadapp/views/settings_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,55 @@ class _HomePageState extends State<SeatingDataPage> {
               ),
             );
           } else {
+            List<Widget> _res = [
+              [
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: FutureBuilder(
+                        future: itsOk(),
+                        builder: (__, AsyncSnapshot<bool> data){
+                          if(data.hasData){
+                            return Container(
+                        height: grid.blockSizeVertical * 10,
+                        color: (data.data) ? CupertinoColors.activeGreen : CupertinoColors.destructiveRed,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: (data.data) ? 
+                            [
+                              Text(
+                              "Todo en orden 🎉🎉",
+                              style: TextStyle(
+                                color: CupertinoColors.white,
+                                fontSize: grid.blockSizeVertical * 3
+                              )
+                            )
+                            ] :
+                            [
+                              Text(
+                              "Algo anda mal, no cuadra 😭😭",
+                              style: TextStyle(
+                                color: CupertinoColors.white,
+                                fontSize: grid.blockSizeVertical * 3
+                              )
+                            )
+                            ]
+                        ),
+                      );
+                          }else{
+                            return Center(
+                              child: CupertinoActivityIndicator(radius: grid.blockSizeHorizontal * 3,),
+                            );
+                          }
+                        },
+                      )
+                    )
+                  ],
+                )
+              ],
+              data.data,
+            ].expand((x) => x).toList();
+
             return CustomScrollView(
               slivers: <Widget>[
                 CupertinoSliverNavigationBar(
@@ -46,7 +96,7 @@ class _HomePageState extends State<SeatingDataPage> {
                 ),
                 SliverToBoxAdapter(
                   child: Container(
-                    child: Column(children: data.data),
+                    child: Column(children: _res),
                   ),
                 )
               ],
@@ -83,7 +133,6 @@ class _HomePageState extends State<SeatingDataPage> {
   }
 
   Widget _typesTile(Transaction datas, Responsive grid) {
-    
     return ListTile(
       title: Text(datas.name,
           style: TextStyle(
@@ -91,26 +140,24 @@ class _HomePageState extends State<SeatingDataPage> {
           )),
       subtitle: Text("\$ ${datas.price}",
           style: TextStyle(
-            color: CupertinoColors.destructiveRed,
-            fontWeight: FontWeight.bold,
-            fontSize: grid.blockSizeVertical * 3
-          )),
+              color: CupertinoColors.destructiveRed,
+              fontWeight: FontWeight.bold,
+              fontSize: grid.blockSizeVertical * 3)),
       trailing: FutureBuilder(
-            future: buttonData(context, datas),
-            builder: (__, AsyncSnapshot<List<Widget>> widget){
-              if(!widget.hasData){
-                return CupertinoActivityIndicator();
-              }else{
-                return  ConstrainedBox(
-                  constraints:  const BoxConstraints(maxWidth: 200),
-                  child: Row(
-                  children: widget.data.toList(),
-                ),
-                );
-              }
-            },
-          ),
-      
+        future: buttonData(context, datas),
+        builder: (__, AsyncSnapshot<List<Widget>> widget) {
+          if (!widget.hasData) {
+            return CupertinoActivityIndicator();
+          } else {
+            return ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 200),
+              child: Row(
+                children: widget.data.toList(),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 
@@ -140,83 +187,100 @@ class _HomePageState extends State<SeatingDataPage> {
   }
 }
 
-Future<List<Widget>> buttonData(BuildContext context, Transaction trans)async{ 
+Future<List<Widget>> buttonData(BuildContext context, Transaction trans) async {
   TypesServices typxService = TypesServices();
   double value;
   final kind = ["CARGO", "ABONO"];
   TextEditingController _textFieldController = TextEditingController();
   List<Typx> data = await typxService.selectWhere("name", trans.name);
-  return kind.map((c) =>
-    RaisedButton(
-    child: (data.first.type == "RESULTADO") ? Text("RES") : Text(c),
-    color: ((data.first.type == "PASIVO" && c == "ABONO") || (data.first.type == "CAPITAL" && c == "ABONO") || (data.first.type == "ACTIVO" && c == "CARGO")) ? CupertinoColors.activeGreen : CupertinoColors.destructiveRed,
-    onPressed: (){
-        showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: Text('Inserte el precio'),
-                  content: TextField(
-                    onChanged: (String response) {
-                      value = double.parse(response);
-                    },
-                    keyboardType: TextInputType.number,
-                    controller: _textFieldController,
-                    decoration: InputDecoration(hintText: "Detalles y presio"),
-                  ),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: new Text('Guardar'),
-                      onPressed: () {
-                        if((data.first.type == "PASIVO" && c == "ABONO") || (data.first.type == "CAPITAL" && c == "ABONO") || (data.first.type == "ACTIVO" && c == "CARGO")){
-                          trans.price = trans.price + value;
-                        }else if(data.first.type == "RESULTADO"){
-                          trans.price = trans.price + value;
-                        }else{
-                          trans.price = trans.price - value;
-                        }
-                        TransactionsService transService =
-                            new TransactionsService(
-                                idtr: trans.idtr,
-                                name: trans.name,
-                                price: trans.price,
-                                seatingRelation: trans.SeatingIds,
-                                typxRelation: trans.TypxIdt);
+  return kind
+      .map((c) => RaisedButton(
+            child: Text(c),
+            color: ((data.first.type == "PASIVO" && c == "ABONO") ||
+                    (data.first.type == "CAPITAL" && c == "ABONO") ||
+                    (data.first.type == "ACTIVO" && c == "CARGO") ||
+                    (data.first.type == "RESULTADO" &&
+                        data.first.natural == "DEUDOR" &&
+                        c == "CARGO") ||
+                    (data.first.type == "RESULTADO" &&
+                        data.first.natural == "ACREEDOR" &&
+                        c == "ABONO"))
+                ? CupertinoColors.activeGreen
+                : CupertinoColors.destructiveRed,
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('Inserte el precio'),
+                      content: TextField(
+                        onChanged: (String response) {
+                          value = double.parse(response);
+                        },
+                        keyboardType: TextInputType.number,
+                        controller: _textFieldController,
+                        decoration:
+                            InputDecoration(hintText: "Detalles y presio"),
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: new Text('Guardar'),
+                          onPressed: () {
+                            if ((data.first.type == "PASIVO" && c == "ABONO") ||
+                                (data.first.type == "CAPITAL" &&
+                                    c == "ABONO") ||
+                                (data.first.type == "ACTIVO" && c == "CARGO") ||
+                                (data.first.type == "RESULTADO" &&
+                                    data.first.natural == "DEUDOR" &&
+                                    c == "CARGO") ||
+                                (data.first.type == "RESULTADO" &&
+                                    data.first.natural == "ACREEDOR" &&
+                                    c == "ABONO")) {
+                              trans.price = trans.price + value;
+                            } else {
+                              trans.price = trans.price - value;
+                            }
+                            TransactionsService transService =
+                                new TransactionsService(
+                                    idtr: trans.idtr,
+                                    name: trans.name,
+                                    price: trans.price,
+                                    seatingRelation: trans.SeatingIds,
+                                    typxRelation: trans.TypxIdt);
 
-                        transService.updatePriceTransaction();
-                        Navigator.pop(context);
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text('Cambiado Exitosamente'),
-                                content: Text(
-                                    "Se le recomienda regresar y entrar de nuevo"),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    child: new Text('Cancelar'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  )
-                                ],
-                              );
-                            });
-                      },
-                    ),
-                    FlatButton(
-                      child: new Text('Cancelar'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    )
-                  ],
-                );
-              });
-    },
-  )
-  
-  ).toList();
+                            transService.updatePriceTransaction();
+                            Navigator.pop(context);
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text('Cambiado Exitosamente'),
+                                    content: Text(
+                                        "Se le recomienda regresar y entrar de nuevo"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: new Text('Cancelar'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      )
+                                    ],
+                                  );
+                                });
+                          },
+                        ),
+                        FlatButton(
+                          child: new Text('Cancelar'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        )
+                      ],
+                    );
+                  });
+            },
+          ))
+      .toList();
 }
 
 /*

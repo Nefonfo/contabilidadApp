@@ -75,3 +75,11 @@ Future<double> getAllSigmaByTypes(String x) async {
 
   return finalReturn;
 }
+
+Future<bool> itsOk() async{
+  double activo = await getAllSigmaByTypes("ACTIVO");
+  double pasivo = await getAllSigmaByTypes("PASIVO");
+  double capital = await getAllSigmaByTypes("CAPITAL");
+
+  return (activo == pasivo + capital);
+}
